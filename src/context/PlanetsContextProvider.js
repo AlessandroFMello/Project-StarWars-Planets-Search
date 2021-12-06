@@ -9,6 +9,7 @@ function PlanetsProvider({ children }) {
   async function getPlanetsResults() {
     const fetchedPlanets = await fetchAPI();
     const planetsResults = fetchedPlanets.results;
+    planetsResults.forEach((result) => delete result.residents);
     setPlanets(planetsResults);
   }
 
