@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
 export default function Table() {
-  const planets = useContext(PlanetsContext);
+  const { filteredPlanets } = useContext(PlanetsContext);
 
   return (
-    <table>
+    <table className="table">
       <thead>
         <tr>
           <th>Nome</th>
@@ -23,7 +23,7 @@ export default function Table() {
           <th>URL</th>
         </tr>
       </thead>
-      {planets.map(({
+      {filteredPlanets.map(({
         name,
         rotation_period: rotationPeriod,
         orbital_period: orbitalPeriod,
