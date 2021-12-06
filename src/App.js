@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import fetchAPI from './services/fetchAPI';
+import PlanetsProvider from './context/PlanetsContextProvider';
+import Table from './components/Table';
 
 function App() {
   return (
-    <>
-      <span>Hello, App!</span>
-      { fetchAPI() }
-    </>
+    <PlanetsProvider>
+      <Table />
+    </PlanetsProvider>
   );
 }
 
