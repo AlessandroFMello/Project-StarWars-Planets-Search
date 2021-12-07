@@ -7,6 +7,8 @@ function Header() {
     handleSubmit,
     handleChange,
     numericFilter,
+    columnFilter,
+    comparisonFilter,
   } = useContext(PlanetsContext);
   return (
     <header className="header-component">
@@ -29,21 +31,25 @@ function Header() {
           data-testid="column-filter"
           name="column"
           onChange={ handleChange }
+          value={ numericFilter.column }
         >
-          <option value="population" selected>population</option>
-          <option value="orbital_period">orbital_period</option>
-          <option value="diameter">diameter</option>
-          <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option>
+          {
+            columnFilter.map((column) => (
+              <option key={ column } value={ column }>{column}</option>
+            ))
+          }
         </select>
         <select
           data-testid="comparison-filter"
           name="comparison"
           onChange={ handleChange }
+          value={ numericFilter.comparison }
         >
-          <option value="maior que" selected>maior que</option>
-          <option value="menor que">menor que</option>
-          <option value="igual a">igual a</option>
+          {
+            comparisonFilter.map((comparison) => (
+              <option key={ comparison } value={ comparison }>{comparison}</option>
+            ))
+          }
         </select>
         <input
           type="number"

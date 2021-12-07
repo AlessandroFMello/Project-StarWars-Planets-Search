@@ -17,6 +17,18 @@ function PlanetsProvider({ children }) {
     comparison: 'maior que',
     value: 0,
   });
+  const [columnFilter, setColumnFilter] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
+  const [comparisonFilter, setComparisonFilter] = useState([
+    'maior que',
+    'menor que',
+    'igual a',
+  ]);
 
   async function getPlanetsResults() {
     const fetchedPlanets = await fetchAPI();
@@ -37,6 +49,17 @@ function PlanetsProvider({ children }) {
   function handleSubmit(event) {
     event.preventDefault();
     setHasFilter(true);
+
+    const filterByValue = planets.filter((planet) => {
+      const comparisonsObj = {
+        'maior que': Number(planet[numericFilter.column]) > Number(numericFilter.value),
+        'menor que': Number(planet[numericFilter.column]) < Number(numericFilter.value),
+        'igual a': Number(planet[numericFilter.column]) === Number(numericFilter.value),
+      };
+
+      return comparisonsObj[numericFilter.comparison];
+    });
+    setFilteredPlanets(filterByValue);
   }
 
   function handleChange({ target: { name, value } }) {
@@ -71,6 +94,10 @@ function PlanetsProvider({ children }) {
     hasFilter,
     handleChange,
     numericFilter,
+    columnFilter,
+    setColumnFilter,
+    comparisonFilter,
+    setComparisonFilter,
   };
 
   return (
