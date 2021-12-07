@@ -11,12 +11,6 @@ function PlanetsProvider({ children }) {
     },
   });
   const [filteredPlanets, setFilteredPlanets] = useState([]);
-  const [hasFilter, setHasFilter] = useState(false);
-  const [numericFilter, setnumericFilter] = useState({
-    column: 'population',
-    comparison: 'maior que',
-    value: 0,
-  });
   const [columnFilter, setColumnFilter] = useState([
     'population',
     'orbital_period',
@@ -29,6 +23,13 @@ function PlanetsProvider({ children }) {
     'menor que',
     'igual a',
   ]);
+  const [hasFilter, setHasFilter] = useState(false);
+  const [numericFilter, setNumericFilter] = useState({
+    column: columnFilter[0],
+    comparison: 'maior que',
+    value: 0,
+  });
+  const [columnFilterArray, setColumnFilterArray] = useState([]);
 
   async function getPlanetsResults() {
     const fetchedPlanets = await fetchAPI();
@@ -60,10 +61,21 @@ function PlanetsProvider({ children }) {
       return comparisonsObj[numericFilter.comparison];
     });
     setFilteredPlanets(filterByValue);
+    setColumnFilterArray([
+      ...columnFilterArray,
+      numericFilter.column,
+    ]);
+    setColumnFilter(
+      columnFilter.filter((column) => numericFilter.column !== column),
+      setNumericFilter({
+        ...numericFilter,
+        column: columnFilter[0],
+      }),
+    );
   }
 
   function handleChange({ target: { name, value } }) {
-    setnumericFilter({
+    setNumericFilter({
       ...numericFilter,
       [name]: value,
     });
@@ -98,6 +110,7 @@ function PlanetsProvider({ children }) {
     setColumnFilter,
     comparisonFilter,
     setComparisonFilter,
+    columnFilterArray,
   };
 
   return (
