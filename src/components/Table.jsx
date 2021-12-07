@@ -9,8 +9,8 @@ export default function Table() {
       <thead>
         <tr>
           <th>Nome</th>
-          <th>Tempo de rotação</th>
-          <th>Periodo da órbita</th>
+          <th>Período de Rotação</th>
+          <th>Periodo da Órbita</th>
           <th>Diâmetro</th>
           <th>Clima</th>
           <th>Gravidade</th>
@@ -37,8 +37,8 @@ export default function Table() {
         edited,
         created,
         url,
-      }, index) => (
-        <tbody key={ index }>
+      }) => (
+        <tbody key={ name }>
           <tr>
             <td>{name}</td>
             <td>{rotationPeriod}</td>

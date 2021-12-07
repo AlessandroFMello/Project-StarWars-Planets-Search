@@ -8,3 +8,10 @@
   flex-direction: column;
   justify-content: center;
 }
+
+.header-initial-div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
