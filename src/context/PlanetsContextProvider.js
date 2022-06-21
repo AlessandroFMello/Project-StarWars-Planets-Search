@@ -51,7 +51,7 @@ function PlanetsProvider({ children }) {
     event.preventDefault();
     setHasFilter(true);
 
-    const filterByValue = planets.filter((planet) => {
+    const filterByValue = filteredPlanets.filter((planet) => {
       const comparisonsObj = {
         'maior que': Number(planet[numericFilter.column]) > Number(numericFilter.value),
         'menor que': Number(planet[numericFilter.column]) < Number(numericFilter.value),
